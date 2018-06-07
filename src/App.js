@@ -2,14 +2,14 @@ import React from 'react'
 import VisibleTodoList from './containers/VisibleTodoList'
 import Head from './containers/Head'
 import AddTodo from './containers/AddTodo'
-import Grid from '@material-ui/core/Grid'
+import './App.css'
 
 const App = () => (
-  <Grid item md={6}>
+  <div>
     <Head />
     <VisibleTodoList />
     <AddTodo />    
-  </Grid>
+  </div>
 )
 
 export default App
