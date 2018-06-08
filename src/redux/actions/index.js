@@ -1,7 +1,7 @@
 import {
     ADD_TODO, SET_VISIBILITY_FILTER, TOGGLE_TODO, DELETE_TODO, EDIT_TODO ,
     SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED
-} from '../../consts/actions' 
+} from '../consts/actions' 
 
 let nextTodoId = 0
 export const addTodo = text => ({
