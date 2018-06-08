@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { VisibilityFilters } from '../actions'
+import { VisibilityFilters } from '../redux/actions'
 import Header from '../components/Header'
 
 const getFilterValue = filter => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import FilterLink from '../containers/FilterLink'
-import { VisibilityFilters } from '../actions'
+import { VisibilityFilters } from '../redux/actions'
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 

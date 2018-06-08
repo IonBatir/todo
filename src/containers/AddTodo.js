@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addTodo } from '../actions'
+import { addTodo } from '../redux/actions'
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Input from '@material-ui/core/Input';
