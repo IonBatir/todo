@@ -34,7 +34,7 @@ module.exports = {
      * todo_id
      */
     toggleTodo: (req, res, next) => {
-        Todo.findById(req.body.todo_id).then((todo)=> {
+        Todo.findById(req.body.id).then((todo)=> {
             return todo.toggle().then(()=>{
                 return res.json({msg: "Done"})
             })

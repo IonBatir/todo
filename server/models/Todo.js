@@ -8,7 +8,7 @@ let TodoSchema = new mongoose.Schema(
     }
 );
 TodoSchema.methods.toggle = function() {
-    this.completed == !this.completed
+    this.completed = !this.completed
     return this.save()
 }
 module.exports = mongoose.model('Todo', TodoSchema)

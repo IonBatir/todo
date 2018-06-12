@@ -19,14 +19,18 @@ export function loadTodos() {
   }
 }
 
+//req.body.todo_id
+export function toggleTodo (id) {
+  return (dispatch) => {
+      axios.post(`${url}todo/toggle`,{ id }).then((res) => {
+          dispatch({type: TOGGLE_TODO, id});
+      }).catch((err)=>console.log(err))
+  }
+}
+
 export const setVisibilityFilter = filter => ({
   type: SET_VISIBILITY_FILTER,
   filter
-})
-
-export const toggleTodo = id => ({
-  type: TOGGLE_TODO,
-  id
 })
 
 export const deleteTodo = id => ({

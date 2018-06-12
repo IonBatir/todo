@@ -18,4 +18,11 @@ module.exports = (router) => {
     router
         .route('/todo')
         .post(multipartWare, todocontroller.addTodo)
+
+    /**
+     * add an todo
+     */
+    router
+    .route('/todo/toggle')
+    .post(multipartWare, todocontroller.toggleTodo)
 }
