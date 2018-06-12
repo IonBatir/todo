@@ -1,12 +1,21 @@
-import { LOAD_TODOS, TOGGLE_TODO, DELETE_TODO, EDIT_TODO } from '../consts/actions'
+import { ADD_TODO, LOAD_TODOS, TOGGLE_TODO, DELETE_TODO, EDIT_TODO } from '../consts/actions'
 
 const todos = (state = [], action) => {
     switch (action.type) {
-      case LOAD_TODOS:
-      return [
+      case ADD_TODO:
+        return [
           ...state,
-          ...action.todos
-      ]
+          {
+            id: action.id,
+            text: action.text,
+            completed: false
+          }
+        ]
+      case LOAD_TODOS:
+        return [
+            ...state,
+            ...action.todos
+        ]
       case TOGGLE_TODO:
         return state.map(todo =>
           (todo._id === action.id)
@@ -14,7 +23,7 @@ const todos = (state = [], action) => {
             : todo
         )
       case DELETE_TODO:
-        return state.filter(todo => todo.id !== action.id)
+        return state.filter(todo => todo._id !== action.id)
       case EDIT_TODO:
         return [
           ...state.slice(0, action.id),

@@ -7,6 +7,11 @@ let TodoSchema = new mongoose.Schema(
         completed: Boolean
     }
 );
+
+TodoSchema.methods.delete = function() {
+    return this.remove()
+}
+
 TodoSchema.methods.toggle = function() {
     this.completed = !this.completed
     return this.save()

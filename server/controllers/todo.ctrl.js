@@ -39,5 +39,17 @@ module.exports = {
                 return res.json({msg: "Done"})
             })
         }).catch(next)
-    }
+    },
+
+    /**
+     * todo_id
+     */
+    deleteTodo: (req, res, next) => {
+        Todo.findById(req.body.id).then((todo)=> {
+            return todo.delete().then(()=>{
+                return res.json({msg: "Deleted"})
+            })
+        }).catch(next)
+    }    
+
 }
