@@ -1,16 +1,7 @@
-import { ADD_TODO, LOAD_TODOS, TOGGLE_TODO, DELETE_TODO, EDIT_TODO } from '../consts/actions'
+import { LOAD_TODOS, TOGGLE_TODO, DELETE_TODO, EDIT_TODO } from '../consts/actions'
 
 const todos = (state = [], action) => {
     switch (action.type) {
-      case ADD_TODO:
-        return [
-          ...state,
-          {
-            id: action.id,
-            text: action.text,
-            completed: false
-          }
-        ]
       case LOAD_TODOS:
       return [
           ...state,
