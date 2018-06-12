@@ -1,6 +1,5 @@
 /** server/controllers/todo.ctrl.js*/
 const Todo = require('../models/Todo')
-const fs = require('fs')
 
 module.exports = {
     addTodo: (req, res, next) => {
@@ -9,9 +8,11 @@ module.exports = {
         function saveTodo(obj) {
             new Todo(obj).save((err, todo) => {
                 if (err)
-                    res.send(err)
+                    res.send(err)               
                 else if (!todo)
                     res.send(400)
+                else 
+                    res.send(todo)                  
                 next()
             })
         }
