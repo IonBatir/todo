@@ -12,10 +12,10 @@ const todos = (state = [], action) => {
           }
         ]
       case LOAD_TODOS:
-        return {
+      return [
           ...state,
           ...action.todos
-        }
+      ]
       case TOGGLE_TODO:
         return state.map(todo =>
           (todo.id === action.id)
@@ -30,7 +30,7 @@ const todos = (state = [], action) => {
           {...state[action.id], text: action.text},
           ...state.slice(action.id + 1)
         ]
-        default:
+      default:
         return state
     }
   }
