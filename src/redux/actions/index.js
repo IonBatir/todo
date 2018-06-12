@@ -2,23 +2,17 @@ import {
     ADD_TODO, LOAD_TODOS, SET_VISIBILITY_FILTER, TOGGLE_TODO, DELETE_TODO, EDIT_TODO ,
     SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED
 } from '../consts/actions' 
+
 import axios from 'axios'
 
 const url = process.env.NODE_ENV === 'production' ? "/api/" : "http://localhost:5000/api/"
 
-let nextTodoId = 0
-export const addTodo = text => ({
-  type: ADD_TODO,
-  id: nextTodoId++,
-  text
-})
-
 export function loadTodos() {
-  return (dispactch) => {
+  return (dispatch) => {
     axios.get(`${url}todos`)
       .then((res) => {
         let todos = res.data
-        dispactch({type: LOAD_TODOS, todos})
+        dispatch({type: LOAD_TODOS, todos})
       }).catch((err) => {
         console.log(err)
       })
