@@ -35,7 +35,7 @@ export function loadTodos() {
 //req.body.todo_id
 export function toggleTodo (id) {
   return (dispatch) => {
-      axios.post(`${url}todo/toggle`, { id })
+      axios.put(`${url}todo/toggle`, { id })
         .then((res) =>
           dispatch({type: TOGGLE_TODO, id})
         ).catch((err) => 
@@ -47,7 +47,7 @@ export function toggleTodo (id) {
 //req.body.todo_id
 export function deleteTodo (id) {
   return (dispatch) => {
-      axios.post(`${url}todo/delete`, { id })
+      axios.delete(`${url}todo/delete`, {params: { id }})
         .then((res) =>
           dispatch({type: DELETE_TODO, id})
         ).catch((err) => 

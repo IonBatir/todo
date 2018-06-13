@@ -23,13 +23,13 @@ module.exports = (router) => {
      * toggle an todo
      */
     router
-    .route('/todo/toggle')
-    .post(multipartWare, todocontroller.toggleTodo)
+        .route('/todo/toggle')
+        .put(multipartWare, todocontroller.toggleTodo)
 
     /**
      * delete an todo
      */
     router
-    .route('/todo/delete')
-    .post(multipartWare, todocontroller.deleteTodo)
+        .route('/todo/delete')
+        .delete(multipartWare, todocontroller.deleteTodo)
 }

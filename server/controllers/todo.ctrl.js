@@ -35,7 +35,7 @@ module.exports = {
      */
     toggleTodo: (req, res, next) => {
         Todo.findById(req.body.id).then((todo)=> {
-            return todo.toggle().then(()=>{
+            return todo.toggle().then(() => {
                 return res.json({msg: "Done"})
             })
         }).catch(next)
@@ -45,8 +45,8 @@ module.exports = {
      * todo_id
      */
     deleteTodo: (req, res, next) => {
-        Todo.findById(req.body.id).then((todo)=> {
-            return todo.delete().then(()=>{
+        Todo.findById(req.query.id).then((todo)=> {
+            return todo.delete().then(() => {
                 return res.json({msg: "Deleted"})
             })
         }).catch(next)
