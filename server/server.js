@@ -1,15 +1,13 @@
 // server/app.js
-
 /** require dependencies */
 const express = require("express")
-const routes = require('./routes/')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const helmet = require('helmet')
+const graphqlHTTP = require("express-graphql");
 
 const app = express()
-const router = express.Router()
 const url = process.env.MONGODB_URI || "mongodb://localhost:27017/todos"
 
 /** connect to MongoDB datastore */
@@ -24,15 +22,17 @@ try {
 
 let port = 5000 || process.env.PORT
 
-/** set up routes {API Endpoints} */
-routes(router)
-
 /** set up middlewares */
-app.use(cors())
+app.use('*', cors())
 app.use(bodyParser.json())
 app.use(helmet())
 
-app.use('/api', router)
+const todoSchema = require('./graphql/index').todoSchema
+app.use('/graphql', cors(), graphqlHTTP({
+  schema: todoSchema,
+  rootValue: global,
+  graphiql: true
+}));
 
 /** start server */
 app.listen(port, () => {
