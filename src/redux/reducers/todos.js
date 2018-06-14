@@ -6,7 +6,7 @@ const todos = (state = [], action) => {
         return [
           ...state,
           {
-            _id: action.id,
+            id: action.id,
             text: action.text,
             completed: false
           }
@@ -18,12 +18,12 @@ const todos = (state = [], action) => {
         ]
       case TOGGLE_TODO:
         return state.map(todo =>
-          (todo._id === action.id)
+          (todo.id === action.id)
             ? {...todo, completed: !todo.completed}
             : todo
         )
       case DELETE_TODO:
-        return state.filter(todo => todo._id !== action.id)
+        return state.filter(todo => todo.id !== action.id)
       case EDIT_TODO:
         return [
           ...state.slice(0, action.id),

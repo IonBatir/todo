@@ -13,10 +13,10 @@ class TodoList extends React.Component {
       <List>
         {todos.map(todo =>
           <Todo
-            key={todo._id}
+            key={todo.id}
             {...todo}
-            onClick={() => toggleTodo(todo._id)}
-            onClickDelete={() => deleteTodo(todo._id)}
+            onClick={() => toggleTodo(todo.id)}
+            onClickDelete={() => deleteTodo(todo.id)}
           />
         )}
       </List>

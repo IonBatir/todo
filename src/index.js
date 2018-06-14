@@ -5,6 +5,9 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { store } from './redux/store'
 
-render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+render(
+        <Provider store={store}>
+            <App />
+        </Provider>, document.getElementById('root'));
 
 registerServiceWorker();
