@@ -6,8 +6,10 @@
   "dependencies": {
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
-    "axios": "^0.18.0",
+    "apollo-client": "^2.3.4",
+    "apollo-client-preset": "^1.0.8",
     "graphql": "^0.13.2",
+    "graphql-tag": "^2.9.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",

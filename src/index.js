@@ -6,8 +6,8 @@ import registerServiceWorker from './registerServiceWorker';
 import { store } from './redux/store'
 
 render(
-        <Provider store={store}>
-            <App />
-        </Provider>, document.getElementById('root'));
+    <Provider store={store}>
+        <App />
+    </Provider>, document.getElementById('root'));
 
 registerServiceWorker();

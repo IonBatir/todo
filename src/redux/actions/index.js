@@ -3,36 +3,46 @@ import {
     SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED
 } from '../consts/actions' 
 
-import axios from 'axios'
+import gql from 'graphql-tag'
+import { ApolloClient } from 'apollo-client'
+import { HttpLink } from 'apollo-link-http'
+import { InMemoryCache } from 'apollo-cache-inmemory'
 
-const url = process.env.NODE_ENV === 'production' ? "/graphql/" : "http://localhost:5000/graphql/"
 
-const GET_QUERY = `
-  {
+const uri = process.env.NODE_ENV === 'production' ? "/graphql/" : "http://localhost:5000/graphql/"
+const httpLink = new HttpLink({ uri })
+const client = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache()    
+})
+
+const GET_QUERY = gql`
+  query TodoQuery {
     todos {
       id, text, completed
     }
   }
 `;
-const ADD_QUERY = text => `
-mutation {
-  addTodo(text: "${text}", completed: false) {
+
+const ADD_MUTATION = gql`
+mutation AddTodo($text: String!) {
+  addTodo(text: $text, completed: false) {
     id, text, completed
   }
 }
 `;
 
-const TOGGLE_QUERY = id => `
-mutation {
-  toggleTodo(id: "${id}") {
+const TOGGLE_MUTATION = gql`
+mutation ToggleTodo($id: String!)  {
+  toggleTodo(id: $id) {
     id, text, completed
   }
 }
 `;
 
-const REMOVE_QUERY = id => `
-mutation {
-  removeTodo(id: "${id}") {
+const REMOVE_MUTATION = gql`
+mutation RemoveTodo($id: String!) {
+  removeTodo(id: $id) {
     id, text, completed
   }
 }
@@ -40,48 +50,44 @@ mutation {
 
 export function loadTodos() {
   return (dispatch) => {
-    axios.post(`${url}`, {query: GET_QUERY})
-      .then((res) => {
-        const todos = res.data.data.todos
-        dispatch({type: LOAD_TODOS, todos})
-      }).catch((err) =>
-        console.log(err)
-      )
+    client.query({ 
+      query: GET_QUERY 
+    }).then(data =>
+      dispatch({type: LOAD_TODOS, todos: data.data.todos})
+    )
   }
 }
 
 export function addTodo(text) {
   return (dispatch) => {
-    axios.post(`${url}`, {query: ADD_QUERY(text)})
-      .then((res) => 
-        dispatch({type: ADD_TODO, id: res.data.data.addTodo.id, text})          
-      ).catch((err) =>
-        console.log(err)
-      )
+    client.mutate({ 
+      mutation: ADD_MUTATION,
+      variables: {text} 
+    }).then(data => 
+      dispatch({type: ADD_TODO, id: data.data.addTodo.id, text})
+    )
   }
 }
 
-//req.body.id
 export function toggleTodo (id) {
   return (dispatch) => {
-      axios.post(`${url}`, {query: TOGGLE_QUERY(id)})
-        .then((res) => 
-          dispatch({type: TOGGLE_TODO, id})          
-        ).catch((err) => 
-          console.log(err)
-        )
+    client.mutate({ 
+      mutation: TOGGLE_MUTATION,
+      variables: {id} })
+    .then(
+      dispatch({type: TOGGLE_TODO, id})  
+    )
   }
 }
 
-//req.query.id
 export function deleteTodo (id) {
   return (dispatch) => {
-      axios.post(`${url}`, {query: REMOVE_QUERY(id)})
-        .then((res) =>
-          dispatch({type: DELETE_TODO, id})
-        ).catch((err) => 
-          console.log(err)
-      )
+    client.mutate({ 
+      mutation: REMOVE_MUTATION, 
+      variables: {id}      
+    }).then(
+      dispatch({type: DELETE_TODO, id})
+    )
   }
 }
 
