@@ -8,9 +8,15 @@
     "@material-ui/icons": "^1.1.0",
     "apollo-client": "^2.3.4",
     "apollo-client-preset": "^1.0.8",
+    "chai": "^4.1.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
+    "jsdom": "^11.11.0",
+    "mocha": "^5.2.0",
     "react": "^16.4.0",
+    "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
@@ -25,7 +31,7 @@
     "dev": "cd server && yarn dev",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject"
   }
 }

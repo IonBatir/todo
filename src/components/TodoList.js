@@ -4,7 +4,8 @@ import Todo from './Todo'
 
 class TodoList extends React.Component {  
   componentWillMount() {
-    this.props.loadTodos()
+    if (typeof this.props.loadTodos !== 'undefined')
+      this.props.loadTodos()
   }
 
   render() {

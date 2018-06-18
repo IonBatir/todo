@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -9,13 +8,13 @@ import DeleteIcon from '@material-ui/icons/Delete'
 
 const Todo = ({ onClick, onClickDelete, completed, text }) => (
   <ListItem
-  role={undefined}
-  onClick={onClick}
+  role={undefined}  
   dense
   button
   >
     <Checkbox
       tabIndex={-1}
+      onClick={onClick}
       checked={completed}
       color="primary"
       disableRipple
@@ -28,12 +27,5 @@ const Todo = ({ onClick, onClickDelete, completed, text }) => (
     </ListItemSecondaryAction>
   </ListItem>
 )
-
-Todo.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  onClickDelete: PropTypes.func.isRequired,
-  completed: PropTypes.bool.isRequired,
-  text: PropTypes.string.isRequired
-}
 
 export default Todo
