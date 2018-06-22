@@ -1,17 +1,19 @@
 import React from 'react';
 import Enzyme, { shallow, mount } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16';
 import { expect } from 'chai'
 import Todo from './components/Todo'
-import Adapter from 'enzyme-adapter-react-16';
-import Checkbox from '@material-ui/core/Checkbox';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import TodoList from './components/TodoList';
+import { AddTodo } from './containers/AddTodo'
+import Checkbox from '@material-ui/core/Checkbox';
+import ListItemText from '@material-ui/core/ListItemText';
+import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
 import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from './redux/reducers/index'
-import { TOGGLE_TODO, DELETE_TODO } from './redux/consts/actions'
-import IconButton from '@material-ui/core/IconButton';
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from './redux/consts/actions'
 
 Enzyme.configure({
   adapter: new Adapter()
@@ -84,5 +86,18 @@ describe('<TodoList />', () => {
     wrapper.find(Todo).first().dive().find(IconButton).simulate('click');
     wrapper.setProps({...store.getState()});
     expect(wrapper.find(Todo)).to.have.length(items.length - 1);
+  })
+})
+
+describe('<AddTodo />', () => {
+  it('shoud call addNewTodo if text is not empty', () => {
+    const initialState = {todos: []};
+    const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
+    const wrapper = mount(<AddTodo addNewTodo={text => store.dispatch({type: ADD_TODO, id: 0, text})} />);
+    wrapper.find('form').simulate('submit');
+    expect(store.getState().todos).to.have.length(0);
+    wrapper.find('input').simulate('change', {target: {value: 'New Todo'}})
+    wrapper.find('form').simulate('submit');      
+    expect(store.getState().todos).to.have.length(1);   
   })
 })
