@@ -4,12 +4,11 @@ import Todo from './Todo'
 
 class TodoList extends React.Component {  
   componentWillMount() {
-    if (typeof this.props.loadTodos !== 'undefined')
-      this.props.loadTodos()
+    this.props.loadTodos && this.props.loadTodos()
   }
 
   render() {
-    const { todos, toggleTodo, deleteTodo } = this.props;
+    const { todos, toggleTodo, deleteTodo } = this.props
     return (
       <List>
         {todos.map(todo =>
